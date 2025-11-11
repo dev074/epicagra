@@ -1,41 +1,80 @@
 <?php
-  /**
-  * Requires the "PHP Email Form" library
-  * The "PHP Email Form" library is available only in the pro version of the template
-  * The library should be uploaded to: vendor/php-email-form/php-email-form.php
-  * For more info and help: https://bootstrapmade.com/php-email-form/
-  */
+// Use these namespaces at the top of the file
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 
-  // Replace contact@example.com with your real receiving email address
-  $receiving_email_address = 'contact@example.com';
+// --- STEP 1: LOAD PHPMailer MANUALLY ---
+// We are pointing to the files we downloaded and placed in the PHPMailer folder.
+// The '../' goes up one level from the 'forms' directory to the main 'Epicagra' directory.
+require '../PHPMailer/src/Exception.php';
+require '../PHPMailer/src/PHPMailer.php';
+require '../PHPMailer/src/SMTP.php';
 
-  if( file_exists($php_email_form = '../assets/vendor/php-email-form/php-email-form.php' )) {
-    include( $php_email_form );
-  } else {
-    die( 'Unable to load the "PHP Email Form" Library!');
-  }
+// Check if the form was submitted using POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-  $contact = new PHP_Email_Form;
-  $contact->ajax = true;
-  
-  $contact->to = $receiving_email_address;
-  $contact->from_name = $_POST['name'];
-  $contact->from_email = $_POST['email'];
-  $contact->subject = $_POST['subject'];
+    // --- STEP 2: SANITIZE AND GET FORM DATA ---
+    $name     = htmlspecialchars(trim($_POST['name']));
+    $mobile   = htmlspecialchars(trim($_POST['mobile']));
+    $email    = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
+    $message  = htmlspecialchars(trim($_POST['message']));
+    
+    $services_string = 'Not specified';
+    if (!empty($_POST['services']) && is_array($_POST['services'])) {
+        $services = array_map('htmlspecialchars', $_POST['services']);
+        $services_string = implode(', ', $services);
+    }
 
-  // Uncomment below code if you want to use SMTP to send emails. You need to enter your correct SMTP credentials
- 
-  // $contact->smtp = array(
-  //   'host' => 'example.com',
-  //   'username' => 'example',
-  //   'password' => 'pass',
-  //   'port' => '587'
-  // );
+    // Basic server-side validation
+    if (empty($name) || empty($mobile) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        http_response_code(400); // Bad Request
+        die('Please fill out all fields correctly.');
+    }
 
+    // --- STEP 3: CONFIGURE AND SEND THE EMAIL ---
+    $mail = new PHPMailer(true);
 
-  $contact->add_message( $_POST['name'], 'From');
-  $contact->add_message( $_POST['email'], 'Email');
-  $contact->add_message( $_POST['message'], 'Message', 10);
+    try {
+        // --- Server settings (This is the Gmail SMTP configuration) ---
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.gmail.com';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'info@epicagra.com';          // Your full Gmail address
+        $mail->Password   = 'ggdj rmgc kpmx suqd'; // *** PASTE THE APP PASSWORD HERE ***
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;    // Use SSL
+        $mail->Port       = 465;                            // Port for SSL
 
-  echo $contact->send();
+        // --- Recipients ---
+        $mail->setFrom($email, $name); // Sets the "From" address to the user who filled the form
+        $mail->addAddress('info@epicagra.com', 'Epicagra Website'); // The email address that will receive the message
+
+        // --- Content ---
+        $mail->isHTML(true); // Set email format to HTML
+        $mail->Subject = 'New Contact Form Submission from ' . $name;
+        $mail->Body    = "<h3>New Message from Epicagra Website</h3>
+                          <p><strong>Name:</strong> {$name}</p>
+                          <p><strong>Mobile:</strong> {$mobile}</p>
+                          <p><strong>Email:</strong> <a href='mailto:{$email}'>{$email}</a></p>
+                          <p><strong>Services of Interest:</strong> {$services_string}</p>
+                          <hr>
+                          <p><strong>Message:</strong><br>" . nl2br($message) . "</p>";
+        $mail->AltBody = "Name: {$name}\nMobile: {$mobile}\nEmail: {$email}\nServices: {$services_string}\n\nMessage:\n{$message}";
+
+        $mail->send();
+
+        // THIS IS THE SUCCESS RESPONSE. The 'validate.js' is waiting for this exact 'OK' text.
+        echo 'OK';
+
+    } catch (Exception $e) {
+        // If it fails, send an error message back to the 'validate.js' script.
+        http_response_code(500);
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+
+} else {
+    // Block direct access to the script
+    http_response_code(403);
+    echo 'There was a problem with your submission, please try again.';
+}
 ?>

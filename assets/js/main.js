@@ -6,7 +6,7 @@
 * License: https://bootstrapmade.com/license/
 */
 
-(function() {
+(function () {
   "use strict";
 
   /**
@@ -52,7 +52,7 @@
    * Toggle mobile nav dropdowns
    */
   document.querySelectorAll('.navmenu .toggle-dropdown').forEach(navmenu => {
-    navmenu.addEventListener('click', function(e) {
+    navmenu.addEventListener('click', function (e) {
       e.preventDefault();
       this.parentNode.classList.toggle('active');
       this.parentNode.nextElementSibling.classList.toggle('dropdown-active');
@@ -119,7 +119,7 @@
     new Waypoint({
       element: item,
       offset: '80%',
-      handler: function(direction) {
+      handler: function (direction) {
         let progress = item.querySelectorAll('.progress .progress-bar');
         progress.forEach(el => {
           el.style.width = el.getAttribute('aria-valuenow') + '%';
@@ -137,7 +137,7 @@
    * Init swiper sliders
    */
   function initSwiper() {
-    document.querySelectorAll(".init-swiper").forEach(function(swiperElement) {
+    document.querySelectorAll(".init-swiper").forEach(function (swiperElement) {
       let config = JSON.parse(
         swiperElement.querySelector(".swiper-config").innerHTML.trim()
       );
@@ -155,13 +155,13 @@
   /**
    * Init isotope layout and filters
    */
-  document.querySelectorAll('.isotope-layout').forEach(function(isotopeItem) {
+  document.querySelectorAll('.isotope-layout').forEach(function (isotopeItem) {
     let layout = isotopeItem.getAttribute('data-layout') ?? 'masonry';
     let filter = isotopeItem.getAttribute('data-default-filter') ?? '*';
     let sort = isotopeItem.getAttribute('data-sort') ?? 'original-order';
 
     let initIsotope;
-    imagesLoaded(isotopeItem.querySelector('.isotope-container'), function() {
+    imagesLoaded(isotopeItem.querySelector('.isotope-container'), function () {
       initIsotope = new Isotope(isotopeItem.querySelector('.isotope-container'), {
         itemSelector: '.isotope-item',
         layoutMode: layout,
@@ -170,8 +170,8 @@
       });
     });
 
-    isotopeItem.querySelectorAll('.isotope-filters li').forEach(function(filters) {
-      filters.addEventListener('click', function() {
+    isotopeItem.querySelectorAll('.isotope-filters li').forEach(function (filters) {
+      filters.addEventListener('click', function () {
         isotopeItem.querySelector('.isotope-filters .filter-active').classList.remove('filter-active');
         this.classList.add('filter-active');
         initIsotope.arrange({
@@ -197,7 +197,7 @@
   /**
    * Correct scrolling position upon page load for URLs containing hash links.
    */
-  window.addEventListener('load', function(e) {
+  window.addEventListener('load', function (e) {
     if (window.location.hash) {
       if (document.querySelector(window.location.hash)) {
         setTimeout(() => {
@@ -235,18 +235,83 @@
   document.addEventListener('scroll', navmenuScrollspy);
 
 
+  // document.addEventListener('DOMContentLoaded', () => {
+  //   const serviceLinks = document.querySelectorAll('a[data-service]');
+  //   serviceLinks.forEach(link => {
+  //     link.addEventListener('click', function (e) {
+  //       const serviceValue = this.dataset.service;
+  //       const contactForm = document.querySelector('.php-email-form');
+  //       if (contactForm && serviceValue) {
+  //         const serviceCheckbox = contactForm.querySelector(`input[name="services[]"][value="${serviceValue}"]`);
+  //         if (serviceCheckbox) {
+  //           const allCheckboxes = contactForm.querySelectorAll('input[name="services[]"]');
+  //           allCheckboxes.forEach(cb => cb.checked = false);
+  //           serviceCheckbox.checked = true;
+  //         }
+  //       }
+  //     });
+  //   });
+  // });
   document.addEventListener('DOMContentLoaded', () => {
-    const serviceLinks = document.querySelectorAll('a[data-service]');
-    serviceLinks.forEach(link => {
+    // --- PART 1: ELEMENTS AND THE REUSABLE UPDATE FUNCTION ---
+
+    const dropdownButton = document.getElementById('services-dropdown');
+    const serviceCheckboxes = document.querySelectorAll('input[name="services[]"]');
+    const requestInfoLinks = document.querySelectorAll('a[data-service]');
+
+    /**
+     * This is the UPDATED function. It now gathers the names of the
+     * selected services and displays them on the button.
+     */
+    function updateButtonText() {
+        const selectedServices = []; // Create an empty array to hold the names
+
+        // Loop through every checkbox
+        serviceCheckboxes.forEach(checkbox => {
+            // If the checkbox is checked...
+            if (checkbox.checked) {
+                // ...find its corresponding label element
+                const label = document.querySelector(`label[for="${checkbox.id}"]`);
+                if (label) {
+                    // Add the label's text (e.g., "Investment") to our array
+                    selectedServices.push(label.textContent.trim());
+                }
+            }
+        });
+
+        // Now, update the button's text based on the array
+        if (selectedServices.length > 0) {
+            // If we have selected services, join them with a comma and space
+            // Result: "Investment, Loan, Insurance"
+            dropdownButton.textContent = selectedServices.join(', ');
+        } else {
+            // If no services are selected, show the default text
+            dropdownButton.textContent = 'Select Services...';
+        }
+    }
+
+    // --- PART 2: EVENT LISTENERS (These remain the same) ---
+
+    // Listener 1: Update the button text whenever a user MANUALLY clicks a checkbox.
+    serviceCheckboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', updateButtonText);
+    });
+
+    // Listener 2: Auto-select a checkbox when a "Request Info" link is clicked.
+    requestInfoLinks.forEach(link => {
       link.addEventListener('click', function(e) {
         const serviceValue = this.dataset.service;
-        const contactForm = document.querySelector('.php-email-form');
-        if (contactForm && serviceValue) {
-          const serviceCheckbox = contactForm.querySelector(`input[name="services[]"][value="${serviceValue}"]`);
+        if (serviceValue) {
+          const serviceCheckbox = document.querySelector(`input[name="services[]"][value="${serviceValue}"]`);
           if (serviceCheckbox) {
-            const allCheckboxes = contactForm.querySelectorAll('input[name="services[]"]');
-            allCheckboxes.forEach(cb => cb.checked = false);
+            // Uncheck all boxes first for a clean selection (optional)
+            // serviceCheckboxes.forEach(cb => cb.checked = false); 
+            
+            // Check the one that was clicked
             serviceCheckbox.checked = true;
+
+            // Call our updated function to display the name on the button
+            updateButtonText();
           }
         }
       });
@@ -255,45 +320,91 @@
   /**
  * Mobile Number Validation
  */
-document.addEventListener('DOMContentLoaded', () => {
-  // --- Make sure to change 'contact-form' to your actual form's ID ---
-  const contactForm = document.getElementById('contact-form');
-  const mobileInput = document.getElementById('mobile-field');
-  const mobileError = document.getElementById('mobile-error');
-  if (contactForm && mobileInput && mobileError) {
-    
-    contactForm.addEventListener('submit', function(event) {
-      
-      const mobileValue = mobileInput.value.trim(); // Get value and remove whitespace
-      const mobileRegex = /^\d{10}$/;
+  document.addEventListener('DOMContentLoaded', () => {
+    // --- Make sure to change 'contact-form' to your actual form's ID ---
+    const contactForm = document.getElementById('contact-form');
+    const mobileInput = document.getElementById('mobile-field');
+    const mobileError = document.getElementById('mobile-error');
+    if (contactForm && mobileInput && mobileError) {
 
-      if (mobileRegex.test(mobileValue)) {
-        // --- VALID ---
-        // Clear any previous error message
-        mobileInput.classList.remove('is-invalid');
-        mobileError.textContent = '';
-        mobileError.style.display = 'none';
-        // Allow the form to submit
-        return true; 
-        
-      } else {
-        // --- INVALID ---
-        // Prevent the form from submitting
-        event.preventDefault(); 
-        
-        // Show the error message
-        mobileInput.classList.add('is-invalid');
-        mobileError.textContent = 'Please enter a valid 10-digit mobile number.';
-        mobileError.style.display = 'block';
-      }
-    });
-    mobileInput.addEventListener('input', function() {
-        if (mobileInput.classList.contains('is-invalid')) {
-            mobileInput.classList.remove('is-invalid');
-            mobileError.style.display = 'none';
+      contactForm.addEventListener('submit', function (event) {
+
+        const mobileValue = mobileInput.value.trim(); // Get value and remove whitespace
+        const mobileRegex = /^\d{10}$/;
+
+        if (mobileRegex.test(mobileValue)) {
+          // --- VALID ---
+          // Clear any previous error message
+          mobileInput.classList.remove('is-invalid');
+          mobileError.textContent = '';
+          mobileError.style.display = 'none';
+          // Allow the form to submit
+          return true;
+
+        } else {
+          // --- INVALID ---
+          // Prevent the form from submitting
+          event.preventDefault();
+
+          // Show the error message
+          mobileInput.classList.add('is-invalid');
+          mobileError.textContent = 'Please enter a valid 10-digit mobile number.';
+          mobileError.style.display = 'block';
         }
+      });
+      mobileInput.addEventListener('input', function () {
+        if (mobileInput.classList.contains('is-invalid')) {
+          mobileInput.classList.remove('is-invalid');
+          mobileError.style.display = 'none';
+        }
+      });
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(function() {
+      var myModal = new bootstrap.Modal(document.getElementById('welcomeModal'));
+      myModal.show();
+    }, 5000); // 5 seconds delay
+  });
+
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const dropdownButton = document.getElementById('services-dropdown');
+    const serviceCheckboxes = document.querySelectorAll('input[name="services[]"]');
+
+    // 2. A function to update the button text
+    function updateButtonText() {
+      const selectedServices = [];
+      
+      // Loop through all checkboxes
+      serviceCheckboxes.forEach(checkbox => {
+        // If a checkbox is checked...
+        if (checkbox.checked) {
+          // ...find its label and add the text to our array
+          const label = document.querySelector(`label[for="${checkbox.id}"]`);
+          if (label) {
+            selectedServices.push(label.textContent.trim());
+          }
+        }
+      });
+
+      // 3. Update the button's text based on what was selected
+      if (selectedServices.length > 0) {
+        // Join the array items with a comma and space
+        dropdownButton.textContent = selectedServices.join(', ');
+      } else {
+        // If nothing is selected, revert to the default text
+        dropdownButton.textContent = 'Select Services...';
+      }
+    }
+
+    // 4. Add an event listener to every checkbox
+    // This will run the update function every time a checkbox is clicked
+    serviceCheckboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', updateButtonText);
     });
-  }
-});
+  });
+
 
 })();

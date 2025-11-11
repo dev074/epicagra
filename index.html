@@ -323,11 +323,13 @@
                             </h6> -->
                   <a href="#contact" class="btn btn-light btn-sm request-button mt-3" data-service="real-estate">Request
                     Info</a>
+                  <a href="real-state.html" class="btn btn-light btn-sm request-button mt-3" >Explore
+                    More</a>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500" id="loan">
             <div class="service-flip-card">
               <div class="service-flip-card-inner">
                 <div class="service-flip-card-front">
@@ -368,7 +370,7 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600" id="insurance">
             <div class="service-flip-card">
               <div class="service-flip-card-inner">
                 <div class="service-flip-card-front">
@@ -404,13 +406,13 @@
                     <li></li>Travel
                   </h6>
                   <a href="#contact" class="btn btn-light btn-sm request-button mt-3"
-                    data-service="service-insurance">Request
+                    data-service="insurance">Request
                     Info</a>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300" id="tax">
             <div class="service-flip-card">
               <div class="service-flip-card-inner">
                 <div class="service-flip-card-front">
@@ -1249,7 +1251,7 @@
 
                 <div class="col-md-12">
                   <label for="message-field" class="pb-2">Message</label>
-                  <textarea class="form-control" name="message" rows="5" id="message-field" required=""></textarea>
+                  <textarea class="form-control" name="message" rows="5" id="message-field"></textarea>
                 </div>
 
                 <div class="col-md-12 text-center">
@@ -1269,6 +1271,24 @@
       </div>
 
     </section><!-- /Contact Section -->
+    <section>
+      <!-- Auto Popup Modal -->
+      <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content text-center p-3">
+            <div class="modal-header border-0">
+              <h5 class="modal-title w-100" id="welcomeModalLabel">Welcome to Epicagra</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <img src="assets/img/new-fevicon.png" alt="Epicagra" class="mb-3" width="80">
+              <p>We’re glad to have you here! Explore our services and let’s build your financial future together.</p>
+              <a href="#services" class="btn btn-primary mt-2" data-bs-dismiss="modal">Explore Services</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
   </main>
 
@@ -1375,13 +1395,13 @@
         <div class="col-lg-2 col-md-3 footer-links">
           <h4>Our Services</h4>
           <ul>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Investment</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Financial Planning</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Retirement Planning</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Real Estate</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Loan</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Insurance</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Tax Consultation</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#services">Investment</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#services">Financial Planning</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#services">Retirement Planning</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#services">Real Estate</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#loan">Loan</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#insurance">Insurance</a></li>
+            <li><i class="bi bi-chevron-right"></i> <a href="#tax">Tax Consultation</a></li>
           </ul>
         </div>
 
@@ -1437,7 +1457,7 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
-  <a href="https://api.whatsapp.com/send/?phone=+918391020001&text=Hello, Epicagra" class="whatsapp-chat"
+  <a href="https://api.whatsapp.com/send/?phone=+918391020001&text=Hello Epicagra, I would like to discuss my financial goals and how you can help." class="whatsapp-chat"
     target="_blank">
     <i class="bi bi-whatsapp"></i>
   </a>
