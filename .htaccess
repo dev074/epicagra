@@ -1,0 +1,32 @@
+# Turn on the URL rewriting engine
+RewriteEngine On
+
+# ===================================================================
+# PART 1: EXTERNAL REDIRECTS (Changes the URL in the user's browser)
+# The server will process these rules from top to bottom.
+# ===================================================================
+
+# RULE 1: Redirect a direct request for "index.html" to the clean root URL ("/").
+# This is a specific rule, so it comes first.
+# Example: epicagra.com/index.html -> epicagra.com
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/index\.html [NC]
+RewriteRule ^index\.html$ / [R=301,L]
+
+# RULE 2: Redirect any other ".html" file to its clean URL version.
+# This is a general rule that catches everything else.
+# Example: epicagra.com/real-state.html -> epicagra.com/real-state
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^/]+)\.html [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+
+# ===================================================================
+# PART 2: INTERNAL REWRITE (Happens secretly on the server)
+# This rule makes the clean URLs actually work.
+# ===================================================================
+
+# RULE 3: If a clean URL is requested, serve the content of the corresponding .html file.
+# This rule only runs if the requested URL isn't a real file or directory.
+# Example: User requests /real-state -> Server loads content from real-state.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)/?$ $1.html [L]
