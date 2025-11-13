@@ -12,29 +12,47 @@
 --------------------------------------------------------------*/
 /* Fonts */
 :root {
-  --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --heading-font: "Montserrat",  sans-serif;
-  --nav-font: "Open Sans",  sans-serif;
+  --default-font: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --heading-font: "Montserrat", sans-serif;
+  --nav-font: "Open Sans", sans-serif;
 }
 
+/* :root {
+  --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --heading-font: "Montserrat", sans-serif;
+  --nav-font: "Open Sans", sans-serif;
+} */
+
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
-:root { 
-  --background-color: #ffffff; /* Background color for the entire website, including individual sections */
-  --default-color: #444444; /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #222222; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #106eea; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
-  --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
-  --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+:root {
+  --background-color: #ffffff;
+  /* Background color for the entire website, including individual sections */
+  --default-color: #444444;
+  /* Default color used for the majority of the text content across the entire website */
+  --heading-color: #222222;
+  /* Color for headings, subheadings and title throughout the website */
+  --accent-color: #106eea;
+  /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --surface-color: #ffffff;
+  /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
+  --contrast-color: #ffffff;
+  /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
 }
 
 /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
-  --nav-color: #222222;  /* The default color of the main navmenu links */
-  --nav-hover-color: #106eea; /* Applied to main navmenu links when they are hovered over or active */
-  --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
-  --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
-  --nav-dropdown-color: #222222; /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: #106eea; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+  --nav-color: #222222;
+  /* The default color of the main navmenu links */
+  --nav-hover-color: #106eea;
+  /* Applied to main navmenu links when they are hovered over or active */
+  --nav-mobile-background-color: #ffffff;
+  /* Used as the background color for mobile navigation menu */
+  --nav-dropdown-background-color: #ffffff;
+  /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
+  --nav-dropdown-color: #222222;
+  /* Used for navigation links of the dropdown items in the navigation menu. */
+  --nav-dropdown-hover-color: #106eea;
+  /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
 
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
@@ -714,7 +732,7 @@ h6 {
   width: 40px;
   height: 40px;
   border-radius: 4px;
-  transition: all 0.4s;
+  transition: all 0.7s;
 }
 
 .scroll-top i {
@@ -1234,7 +1252,8 @@ section,
   background-color: transparent;
   width: 100%;
   height: 100%;
-  min-height: 350px; /* Adjust if your cards are taller */
+  min-height: 350px;
+  /* Adjust if your cards are taller */
   perspective: 1000px;
 }
 
@@ -1258,7 +1277,8 @@ section,
   position: absolute;
   width: 100%;
   height: 100%;
-  -webkit-backface-visibility: hidden; /* Safari */
+  -webkit-backface-visibility: hidden;
+  /* Safari */
   backface-visibility: hidden;
 }
 
@@ -1267,10 +1287,13 @@ section,
 
 /* The back face is initially hidden and rotated */
 .service-flip-card-back {
-  background-color: var(--accent-color); /* USES YOUR ACCENT COLOR */
-  color: var(--contrast-color, #ffffff)!important; /* Uses your contrast color, or defaults to white */
+  background-color: var(--accent-color);
+  /* USES YOUR ACCENT COLOR */
+  color: var(--contrast-color, #ffffff) !important;
+  /* Uses your contrast color, or defaults to white */
   transform: rotateY(180deg);
-  border-radius: 6px; /* Match the style of your front card if it has a radius */
+  border-radius: 6px;
+  /* Match the style of your front card if it has a radius */
   display: flex;
   flex-direction: column;
   /* align-items: center; */
@@ -1300,7 +1323,8 @@ section,
 }
 
 .service-flip-card:hover .service-item h3 {
-  color: initial; /* Or specify the exact non-hover color if needed */
+  color: initial;
+  /* Or specify the exact non-hover color if needed */
 }
 
 /*
@@ -1314,11 +1338,13 @@ section,
   align-items: center;
   width: 100%;
   height: 100%;
-  
+
   /* Reset link styling to match the card's theme */
-  color: inherit; /* This makes it use the parent's text color (white) */
-  text-decoration: none; /* Removes the underline */
-  
+  color: inherit;
+  /* This makes it use the parent's text color (white) */
+  text-decoration: none;
+  /* Removes the underline */
+
   /* Optional: Add a subtle visual cue on hover */
   transition: transform 0.3s ease;
 }
@@ -1328,9 +1354,9 @@ section,
   transform: scale(1.03);
 }
 
-.request-button{
-    font-family: 'Montserrat'!important;
-    font-weight: 600!important;
+.request-button {
+  font-family: 'Montserrat' !important;
+  font-weight: 600 !important;
 }
 
 /*--------------------------------------------------------------
@@ -1818,11 +1844,12 @@ section,
 }
 
 .faq-item.faq-active .faq-toggle {
-      transform: rotate(90deg);
-      color: #ffffff!important;
+  transform: rotate(90deg);
+  color: #ffffff !important;
 }
+
 .faq-item .faq-toggle {
-       transition: transform 0.3s ease-in-out, color 0.3s ease-in-out!important;
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out !important;
 }
 
 .faq .faq-container .faq-active h3:hover {
@@ -2081,7 +2108,8 @@ section,
   position: fixed;
   bottom: 25px;
   left: 25px;
-  background-color: #25D366; /* Official WhatsApp Green */
+  background-color: #25D366;
+  /* Official WhatsApp Green */
   color: white;
   width: 60px;
   height: 60px;
@@ -2093,31 +2121,259 @@ section,
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   transition: all 0.3s ease;
-  text-decoration: none; /* Removes underline from the link */
+  text-decoration: none;
+  /* Removes underline from the link */
 }
 
 .whatsapp-chat:hover {
-  background-color: #128C7E; /* A darker green for hover effect */
+  background-color: #128C7E;
+  /* A darker green for hover effect */
   transform: scale(1.1);
   color: white;
 }
 
 /* Style for the invalid input field */
 .is-invalid {
-  border-color: #dc3545 !important; /* Use !important to override other styles if needed */
+  border-color: #dc3545 !important;
+  /* Use !important to override other styles if needed */
 }
 
 /* Style for the error message text */
 .error-message {
   color: #dc3545;
-  font-size: 0.875em; /* 14px if base font is 16px */
+  font-size: 0.875em;
+  /* 14px if base font is 16px */
   margin-top: 5px;
-  display: none; /* Hidden by default */
+  display: none;
+  /* Hidden by default */
 }
+
 .flip-card:hover .flip-card-inner {
   transform: rotateY(180deg);
 }
 
 .dropdown-toggle {
-    white-space: normal;
+  white-space: normal;
+}
+
+.property-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  /* Ensures the image corners are rounded */
+  display: flex;
+  transition: all 0.3s ease-in-out;
+  height: 15rem;
+}
+
+.property-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* The image part of the card */
+.property-image {
+  position: relative;
+  flex-shrink: 0;
+  /* Prevents the image from shrinking */
+  width: 50%;
+}
+
+.property-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Ensures the image covers the area without distortion */
+}
+
+/* The badges like "Featured", "Rent", etc. */
+.property-tags {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  display: flex;
+  gap: 8px;
+}
+
+.tag {
+  padding: 5px 12px;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.tag.featured {
+  background-color: #28a745;
+}
+
+/* Green */
+.tag.rent {
+  background-color: #007bff;
+}
+
+/* Blue */
+.tag.buy {
+  background-color: #17a2b8;
+}
+
+/* Teal */
+
+/* The details part of the card */
+.property-details {
+  padding: 25px;
+  width: 50%;
+  position: relative;
+}
+
+.property-details h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+/* The stats grid (Beds, Baths, etc.) */
+.property-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 20px;
+  color: #6c757d;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+}
+
+.stat-item i {
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+/* The pricing section */
+.property-price {
+  margin-top: 20px;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: 700;
+  color: #007bff;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #adb5bd;
+  margin-left: 10px;
+}
+
+/* The view icon at the bottom right */
+.view-icon {
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+  font-size: 24px;
+  color: #ced4da;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.view-icon:hover {
+  color: #007bff;
+}
+
+#latest-news {
+  padding: 60px 0;
+  background-color: #ffffff;
+}
+
+news-card {
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  /* Important for the image corners */
+  transition: all 0.3s ease-in-out;
+  border: 1px solid #e9ecef;
+  /* A very light border */
+}
+
+.news-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* The image container */
+.news-image {
+  position: relative;
+  /* This is the anchor for the date badge */
+}
+
+.news-image img {
+  width: 100%;
+  height: 250px;
+  /* Fixed height for consistency */
+  object-fit: cover;
+}
+
+/* The date badge */
+.date-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #007bff;
+  /* Bootstrap primary blue */
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 8px;
+  text-align: center;
+  line-height: 1;
+  width: 60px;
+  /* Fixed width */
+}
+
+.date-badge .day {
+  display: block;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.date-badge .month {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* The content area below the image */
+.news-content {
+  padding: 25px;
+}
+
+.news-content h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.news-content h3 a {
+  color: #212529;
+  /* Dark text color */
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.news-content h3 a:hover {
+  color: #007bff;
+  /* Blue on hover */
+}
+
+.news-content p {
+  color: #6c757d;
+  /* Grey for the excerpt */
+  font-size: 14px;
+  line-height: 1.6;
 }
