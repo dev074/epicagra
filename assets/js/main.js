@@ -406,5 +406,34 @@
     });
   });
 
+  document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- PART 1: Initialize the Flatpickr Date & Time Picker ---
+    flatpickr("#meeting-time", {
+        enableTime: true,
+        dateFormat: "F j, Y at h:i K", // e.g., "November 15, 2025 at 04:30 PM"
+        
+        // Rule: Only allow future dates
+        minDate: "today",
+        
+        // Rule: Only allow times between 2 PM and 10 PM
+        minTime: "14:00",
+        maxTime: "22:00",
+        
+        // Rule: Disable all Sundays
+        disable: [
+            function(date) {
+                // Return true to disable the date
+                return (date.getDay() === 0); // 0 = Sunday
+            }
+        ],
+    });
+
+    // --- PART 2: The existing script for your services dropdown ---
+    const dropdownButton = document.getElementById('services-dropdown');
+    // ... (the rest of your dropdown script can go here)
+
+  });
+
 
 })();

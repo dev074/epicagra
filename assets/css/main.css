@@ -2165,6 +2165,7 @@ section,
   display: flex;
   transition: all 0.3s ease-in-out;
   height: 15rem;
+  cursor: pointer;
 }
 
 .property-card:hover {
@@ -2375,5 +2376,57 @@ news-card {
   color: #6c757d;
   /* Grey for the excerpt */
   font-size: 14px;
+  line-height: 1.6;
+}
+
+
+#why-choose-us {
+  padding: 30px 0;
+ 
+}
+
+/* Container for each feature item */
+.feature-item {
+  display: flex;
+  /* Aligns icon and text side-by-side */
+  align-items: flex-start;
+  /* Aligns items to the top */
+  margin-bottom: 40px;
+}
+
+/* The icon wrapper */
+.feature-icon {
+  flex-shrink: 0;
+  /* Prevents the icon from shrinking */
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  /* The image shows a very light blue background and a blue border */
+  background-color: #e7f5ff;
+  border: 1px solid #b3d9ff;
+  margin-right: 25px;
+}
+
+.feature-icon i {
+  font-size: 30px;
+  color: #007bff;
+  /* Bootstrap primary blue */
+}
+
+/* The text content next to the icon */
+.feature-content h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #343a40;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.feature-content p {
+  font-size: 14px;
+  color: #6c757d;
   line-height: 1.6;
 }

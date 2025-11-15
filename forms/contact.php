@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mobile   = htmlspecialchars(trim($_POST['mobile']));
     $email    = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
     $message  = htmlspecialchars(trim($_POST['message']));
-    
+    $meetingTime  = htmlspecialchars(trim($_POST['meeting-time']));
     $services_string = 'Not specified';
     if (!empty($_POST['services']) && is_array($_POST['services'])) {
         $services = array_map('htmlspecialchars', $_POST['services']);
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Basic server-side validation
-    if (empty($name) || empty($mobile) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    if (empty($name) || empty($mobile) || !filter_var($email, FILTER_VALIDATE_EMAIL) || empty($meetingTime)) {
         http_response_code(400); // Bad Request
         die('Please fill out all fields correctly.');
     }
@@ -57,9 +57,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                           <p><strong>Mobile:</strong> {$mobile}</p>
                           <p><strong>Email:</strong> <a href='mailto:{$email}'>{$email}</a></p>
                           <p><strong>Services of Interest:</strong> {$services_string}</p>
+                          <p><strong>Requested Meeting Time:</strong> {$meetingTime}</p>
                           <hr>
                           <p><strong>Message:</strong><br>" . nl2br($message) . "</p>";
-        $mail->AltBody = "Name: {$name}\nMobile: {$mobile}\nEmail: {$email}\nServices: {$services_string}\n\nMessage:\n{$message}";
+        $mail->AltBody = "Name: {$name}\nMobile: {$mobile}\nEmail: {$email}\nServices: {$services_string}nRequested Meeting Time: {$meetingTime}\n\nMessage:\n{$message}";
 
         $mail->send();
 

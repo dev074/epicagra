@@ -26,6 +26,9 @@
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+  <!-- Add Flatpickr CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
   <link rel="preload" href="assets/vendor/bootstrap/css/bootstrap.min.css" as="style">
@@ -310,6 +313,9 @@
                   </h6>
                   <h6>
                     <li></li>Pune, India
+                  </h6>
+                  <h6>
+                    <li></li>Indore, India
                   </h6>
                   <h6>
                     <li></li>Australia
@@ -1194,7 +1200,7 @@
 
                 <div class="col-md-6">
                   <label for="email-field" class="pb-2">Email</label>
-                  <input type="email" class="form-control" name="email" id="email-field" required="">
+                  <input type="email" class="form-control" name="email" id="email-field">
                 </div>
                 <div class="col-md-6">
                   <div class="col-md-12"> <!-- or col-md-6 -->
@@ -1247,6 +1253,11 @@
                       </div>
                     </div>
                   </div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="meeting-time" class="pb-2">Preferred Meeting Date & Time</label>
+                    <input type="text" name="meeting-time" id="meeting-time" class="form-control" placeholder="Select a date & time..." required="">
                 </div>
 
                 <div class="col-md-12">
@@ -1454,6 +1465,7 @@
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
